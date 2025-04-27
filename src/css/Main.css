@@ -1,0 +1,64 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+    background-color: #707070;
+    color : #fff;
+    position: relative;
+    padding-bottom: 3em;
+
+}
+.card {
+    position: relative;
+    width: 80vw;
+    height: 100vh; 
+    background-image: url('../assets/Messi.jpg'); 
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px; 
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    margin: auto; 
+}
+
+.card-content {
+    position: absolute;
+    top: 40%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    background: rgba(0, 0, 0, 0.6); 
+    color: white;
+    padding: 1em;
+    text-align: left;
+    border-radius: 15px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: auto; 
+}
+
+.card-title {
+    font-size: 1.8em; 
+    margin: 0;
+}
+
+.card-text {
+    font-size: 1em;
+    margin: 0.5em 0 0;
+    text-align: left;
+}
+.card-content h3 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    width: 100%;
+}
+
+.card-content hr {
+    width: 100%;
+    border: 1px solid white;
+    margin: 0.5em 0; 
+}
