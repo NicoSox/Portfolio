@@ -1,0 +1,109 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #121212; /* Fondo más oscuro */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Card visiblemente diferenciada del fondo */
+.card {
+  display: flex;
+  width: 100%;
+  max-width: 400px;
+  background-color: #1e1e1e; /* Color gris más claro que el fondo */
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6); /* Sombra más fuerte */
+  animation: fadeIn 0.6s ease-in-out;
+  border: 1px solid rgba(255, 255, 255, 0.05); /* Sutil contorno */
+  flex-direction: column; /* Apilar elementos verticalmente */
+  align-items: center;     /* Centrar horizontalmente */
+}
+
+/* Formulario y inputs */
+.card form .mb-3 {
+  margin-bottom: 1.5rem;
+}
+
+.card form .form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #e0e0e0;
+}
+
+.card form input[type="email"],
+.card form input[type="password"] {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #444;
+  background-color: #2a2a2a;
+  color: #fff;
+  padding: 0.75rem;
+  font-size: 1rem;
+  box-sizing: border-box;
+  margin-top: 0.2rem;
+}
+
+.card form input[type="email"]::placeholder,
+.card form input[type="password"]::placeholder {
+  color: #bbb;
+}
+
+.card form .form-text {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #aaa;
+}
+
+.card form .form-check {
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.card form .form-check-label {
+  margin-left: 0.5rem;
+  color: #ccc;
+}
+
+/* Botón */
+.card form .btn {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.card form .btn:hover {
+  background-color: #0056b3;
+}
+
+/* Animación */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*////////////////////////////////////////////////////////////////////////////////////////////// */
+
+.logo-img{
+  width: 50px ;
+  height: 50px;
+  margin-bottom: 2rem; /*Espaciado debajo del logo*/
+}

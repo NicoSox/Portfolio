@@ -1,0 +1,46 @@
+/* src/components/Navbarjobs.css */
+.navbarjobs {
+  position: fixed;
+  top: 60px; /* debajo del navbar principal */
+  left: 0;
+  right: 0;
+  height: 50px;
+  background-color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  z-index: 999;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.tab-button {
+  background: none;
+  color: beige;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s, color 0.3s;
+}
+
+.tab-button:hover {
+  color: #fff;
+}
+
+.tab-button.active {
+  border-bottom: 2px solid #f0c040;
+  font-weight: bold;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
