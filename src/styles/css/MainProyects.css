@@ -1,0 +1,25 @@
+.main-scrollable {
+position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  bottom: 60px; /* alto del footer */
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+  box-sizing: border-box;
+}
+.hero {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.hero-btn.primary {
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+}
+
+.hero-btn.primary:hover {
+  background-color: var(--hover-bg);
+  color: var(--text-color);
+}

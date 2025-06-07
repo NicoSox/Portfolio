@@ -1,0 +1,40 @@
+/* App.css */
+
+/* Tema claro */
+body.light-theme {
+  --bg-color: #ffffff;
+  --text-color: #1a1a1a;
+}
+
+/* Tema oscuro */
+body.dark-theme {
+  --bg-color: #1a1a1a;
+  --text-color: #f1f1f1;
+}
+
+/* Aplica fondo y texto al body */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+  --bg-color: #1a1a1a;
+  --text-color: #f1f1f1;
+  --hover-bg: #333333;
+}
+
+/* ← agregalo justo después del bloque anterior */
+body.dark-mode div,
+body.dark-mode p,
+body.dark-mode span,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+  color: var(--text-color);
+}
+

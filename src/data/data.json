@@ -1,0 +1,28 @@
+[
+  {
+    "nombre": "Nicolás",
+    "segundo_nombre": "Mauricio",
+    "apellido": "Soxkij",
+    "facultad":"Universidad Technológica Nacional-FRT (UTN)",
+    "carrera": "Tecnicatura Universitaria en Programación",
+    "proxima_carrera": "Ingeniería en Sistemas de Información",
+    "edad":29,
+    "mail":"nicosoxkij@gmail.com",
+    "telefono":"+54 9 11-3099-1611",
+    "github":"https://github.com/NicoSox",
+    "linkedin":"https://www.linkedin.com/in/nicolas-soxkij/",
+    "lenguajes":[
+        "Java",
+        "Html5",
+        "Css3",
+        "JavaScript",
+        "Python",
+        "React",
+        "Node.js",
+        "MySQL",
+        "SQL Server"
+    ],
+    "imagen": "/src/assets/Mi-imagen.jpg"
+  }
+]
+
