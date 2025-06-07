@@ -12,7 +12,7 @@ const Header = () => {
   return (
     <nav className="navbar">
       <div className="logo-box">
-        <img src="/src/assets/LOGO.png" alt="Logo" className="logo" />Soxkij Nicolás
+        <img src="/assets/LOGO.png" alt="Logo" className="logo" />Soxkij Nicolás
       </div>
 
       <button className="hamburger-btn" onClick={toggleMenu}><i className={`bi ${isOpen ? 'bi-x-lg' : 'bi-list'}`}></i></button>

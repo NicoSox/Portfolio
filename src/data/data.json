@@ -22,7 +22,7 @@
         "MySQL",
         "SQL Server"
     ],
-    "imagen": "/src/assets/Mi-imagen.jpg"
+    "imagen": "/assets/Mi-imagen.jpg"
   }
 ]
 

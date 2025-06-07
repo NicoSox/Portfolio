@@ -23,7 +23,7 @@ const Main = () => {
                         </div>
                     </div>
                     <div class="hero-image">
-                        <img src="/src/assets/img-code.png" alt="Imagen representativa" />
+                        <img src="assets/img-code.png" alt="Imagen representativa" />
                     </div>
                 </section>
             </div>
