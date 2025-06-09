@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../styles/css/MainProyects.css';
-import data from '../../data/data.json';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Main = () => {
-  const [info] = useState(data[0]);
+  const [info, setInfo] = useState(null);
   const [expandedCards, setExpandedCards] = useState({});
   const [activeImage, setActiveImage] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    fetch('/data.json')
+      .then((res) => res.json())
+      .then((data) => setInfo(data[0]))
+      .catch((err) => console.error('Error al cargar datos:', err));
+  }, []);
 
   const toggleExpand = (index) => {
     setExpandedCards((prev) => ({
@@ -23,7 +29,7 @@ const Main = () => {
 
   return (
     <>
-      <button onClick={() => navigate(-1)}style={{position: 'absolute',top: '70px',left: '10px',padding: '8px 12px',cursor: 'pointer',borderRadius: '5px',border: '1px solid #ccc',backgroundColor: '#fff',zIndex: 1100,}}>
+      <button onClick={() => navigate(-1)}style={{ position: 'absolute',top: '70px',left: '10px',padding: '8px 12px',cursor: 'pointer',borderRadius: '5px',border: '1px solid #ccc',backgroundColor: '#fff',zIndex: 1100,}}>
         ← Volver
       </button>
 
@@ -39,7 +45,12 @@ const Main = () => {
               >
                 <div className="card-main-proyects-content">
                   <div className="card-main-proyects-img">
-                    <img src={proyecto.imagen_proyecto}alt={proyecto.nombre}onClick={() => openImage(proyecto.imagen_proyecto)}style={{ cursor: 'pointer' }}/>
+                    <img
+                      src={proyecto.imagen_proyecto}
+                      alt={proyecto.nombre}
+                      onClick={() => openImage(proyecto.imagen_proyecto)}
+                      style={{ cursor: 'pointer' }}
+                    />
                   </div>
 
                   {isExpanded && (
@@ -55,7 +66,12 @@ const Main = () => {
                         {proyecto.descripcion}
                       </p>
                       <br />
-                      <a href={proyecto.enlace}target="_blank"rel="noopener noreferrer"className="btn-ver-codigo">
+                      <a
+                        href={proyecto.enlace}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-ver-codigo"
+                      >
                         Quiero ver el código
                       </a>
                     </div>

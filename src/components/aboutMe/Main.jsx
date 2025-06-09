@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; 
-import data from '../../data/data.json'; 
+
 import '../../styles/css/MainAbout.css';
 
 const Main = () => {
@@ -8,9 +8,14 @@ const Main = () => {
   const navigate = useNavigate(); 
 
   useEffect(() => {
-    if (data && data.length > 0) {
-      setInfo(data[0]);
-    }
+    fetch('/data.json')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.length > 0) {
+          setInfo(data[0]);
+        }
+      })
+      .catch((err) => console.error('Error al cargar datos:', err));
   }, []);
 
   if (!info) return <p>Cargando información...</p>;
@@ -18,14 +23,18 @@ const Main = () => {
   return (
     <div className="main-scrollable">
       {/* Botón volver arriba a la izquierda */}
-      <button onClick={() => navigate(-1)} style={{position: 'absolute', top: '10px',left: '10px',padding: '8px 12px',cursor: 'pointer',borderRadius: '5px',border: '1px solid #ccc',backgroundColor: '#fff',zIndex: 1000}}>
+      <button onClick={() => navigate(-1)}style={{ position: 'absolute',top: '10px',left: '10px',padding: '8px 12px',cursor: 'pointer',borderRadius: '5px',border: '1px solid #ccc',backgroundColor: '#fff',zIndex: 1000,}}>
         ← Volver
       </button>
 
       <div className="about-container">
-        <h1 style={{textAlign:"center"}}>About Me</h1>
+        <h1 style={{ textAlign: "center" }}>About Me</h1>
         <div className="profile-card">
-          <img src={info.imagen} alt={`${info.nombre} ${info.apellido}`} className="profile-image" />
+          <img
+            src={info.imagen}
+            alt={`${info.nombre} ${info.apellido}`}
+            className="profile-image"
+          />
           <div className="profile-info">
             <h2>{info.nombre} {info.segundo_nombre} {info.apellido}</h2>
             <p><strong>Edad:</strong> {info.edad}</p>
@@ -55,3 +64,4 @@ const Main = () => {
 };
 
 export default Main;
+
