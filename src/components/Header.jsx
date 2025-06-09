@@ -15,14 +15,19 @@ const Header = () => {
         <img src="/assets/LOGO.png" alt="Logo" className="logo" />Soxkij Nicolás
       </div>
 
-      <button className="hamburger-btn" onClick={toggleMenu}><i className={`bi ${isOpen ? 'bi-x-lg' : 'bi-list'}`}></i></button>
+      <button className="hamburger-btn" onClick={toggleMenu}>
+        <i className={`bi ${isOpen ? 'bi-x-lg' : 'bi-list'}`}></i>
+      </button>
 
       <ul className={`navbar-links ${isOpen ? 'open' : ''}`}>
         <li><Link to="/" onClick={() => setIsOpen(false)}>Home</Link></li>
         <li><Link to="/AboutMe" onClick={() => setIsOpen(false)}>About Me</Link></li>
-        <li><Link to="/Proyects" onClick={() => setIsOpen(false)}>My projects</Link></li>
+        <li><Link to="/Proyects" onClick={() => setIsOpen(false)}>My Projects</Link></li>
+        <li><Link to="/Contact" onClick={() => setIsOpen(false)}>Contact</Link></li>
         <li>
-          <button onClick={toggleTheme} className="theme-btn"><i className={`bi ${theme === 'dark' ? 'bi-sun' : 'bi-moon'}`}></i></button>
+          <button onClick={toggleTheme} className="theme-btn">
+            <i className={`bi ${theme === 'dark' ? 'bi-sun' : 'bi-moon'}`}></i>
+          </button>
         </li>
       </ul>
     </nav>
