@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';  // <-- importamos useNavigate
+import { useNavigate } from 'react-router-dom'; 
 import data from '../../data/data.json'; 
 import '../../styles/css/MainAbout.css';
 
 const Main = () => {
   const [info, setInfo] = useState(null);
-  const navigate = useNavigate();  // <-- hook para navegación
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     if (data && data.length > 0) {
