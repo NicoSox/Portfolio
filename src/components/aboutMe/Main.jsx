@@ -18,20 +18,7 @@ const Main = () => {
   return (
     <div className="main-scrollable">
       {/* Botón volver arriba a la izquierda */}
-      <button 
-        onClick={() => navigate(-1)} 
-        style={{
-          position: 'absolute',
-          top: '10px',
-          left: '10px',
-          padding: '8px 12px',
-          cursor: 'pointer',
-          borderRadius: '5px',
-          border: '1px solid #ccc',
-          backgroundColor: '#fff',
-          zIndex: 1000
-        }}
-      >
+      <button onClick={() => navigate(-1)} style={{position: 'absolute', top: '10px',left: '10px',padding: '8px 12px',cursor: 'pointer',borderRadius: '5px',border: '1px solid #ccc',backgroundColor: '#fff',zIndex: 1000}}>
         ← Volver
       </button>
 
