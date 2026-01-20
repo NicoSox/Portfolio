@@ -1,36 +1,48 @@
-import React, { useState } from 'react';
-import { FaGithub, FaLinkedin, FaWhatsapp, FaEnvelope } from 'react-icons/fa';
-import '../styles/css/Footer.css'; 
+import React from 'react';
+import './Footer.css';
 
-const Footer = () => {
-  const [open, setOpen] = useState(false);
-
+const Footer = ({ data, labels }) => {
   return (
-    <div className="footer-container">
-      <div className="footer-toggle"onClick={() => setOpen(!open)}onKeyDown={(e) => { if (e.key === 'Enter') setOpen(!open) }}role="button"tabIndex={0}aria-expanded={open}aria-controls="social-links">
-        {open ? 'Cerrar redes sociales ✕' : 'Mostrar redes sociales ▼'}
-      </div>
-
-      {open && (
-        <div id="social-links" className="footer-social-links">
-          <a href="https://github.com/NicoSox"target="_blank"rel="noopener noreferrer"aria-label="GitHub"className="social-icon">
-            <FaGithub size={28} />
-          </a>
-
-          <a href="https://www.linkedin.com/in/nicolas-soxkij/"target="_blank"rel="noopener noreferrer"aria-label="LinkedIn"className="social-icon">
-            <FaLinkedin size={28} />
-          </a>
-
-          <a href="https://wa.me/5491130991611"target="_blank"rel="noopener noreferrer"aria-label="WhatsApp"className="social-icon">
-            <FaWhatsapp size={28} />
-          </a>
-
-          <a href="mailto:nicosoxkij@gmail.com"aria-label="Email"className="social-icon">
-            <FaEnvelope size={28} />
-          </a>
+    <footer className="footer">
+      <div className="footer-container">
+        <div className="footer-content">
+          <div className="footer-section">
+            <h3 className="footer-title">{data.nombre} {data.apellido}</h3>
+            <p className="footer-description">{labels.headline}</p>
+          </div>
+          
+          <div className="footer-section">
+            <h4 className="footer-subtitle">{labels.quickLinks}</h4>
+            <ul className="footer-links">
+              <li><a href="#home">{labels.links.home}</a></li>
+              <li><a href="#about">{labels.links.about}</a></li>
+              <li><a href="#skills">{labels.links.skills}</a></li>
+              <li><a href="#projects">{labels.links.projects}</a></li>
+              <li><a href="#contact">{labels.links.contact}</a></li>
+            </ul>
+          </div>
+          
+          <div className="footer-section">
+            <h4 className="footer-subtitle">{labels.connect}</h4>
+            <div className="footer-social">
+              <a href={data.github} target="_blank" rel="noopener noreferrer" className="footer-social-link">
+                <i className="fab fa-github"></i>
+              </a>
+              <a href={data.linkedin} target="_blank" rel="noopener noreferrer" className="footer-social-link">
+                <i className="fab fa-linkedin"></i>
+              </a>
+              <a href={`mailto:${data.mail}`} className="footer-social-link">
+                <i className="fas fa-envelope"></i>
+              </a>
+            </div>
+          </div>
         </div>
-      )}
-    </div>
+        
+        <div className="footer-bottom">
+          <p>&copy; {new Date().getFullYear()} {data.nombre} {data.apellido}. {labels.rights}</p>
+        </div>
+      </div>
+    </footer>
   );
 };
 

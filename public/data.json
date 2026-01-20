@@ -22,6 +22,11 @@
         "MySQL",
         "SQL Server"
     ],
+    "conocimientos":[
+      "Gestión de desarrollo de software",
+      "Metodologías ágiles (SCRUM)",
+      "Análisis de datos"
+    ],
     "imagen": "/assets/Mi-imagen.jpg",
     "mis_proyectos":[
       {

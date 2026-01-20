@@ -14,7 +14,8 @@ body.dark-theme {
 
 /* Aplica fondo y texto al body */
 body {
-  background-color: var(--bg-color);
+  /* background handled by animated gradient container */
+  background-color: transparent;
   color: var(--text-color);
   transition: background-color 0.3s, color 0.3s;
 }
@@ -37,4 +38,99 @@ body.dark-mode h5,
 body.dark-mode h6 {
   color: var(--text-color);
 }
+
+/* Animation utilities (page load animations) */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animated { animation-fill-mode: both; animation-duration: 0.56s; animation-timing-function: cubic-bezier(.2,.9,.3,1); }
+.fade-in { animation-name: fadeIn; }
+.fade-up { animation-name: fadeUp; }
+.slide-down { animation-name: slideDown; }
+.scale-in { animation-name: scaleIn; }
+
+/* Animated professional gradient background */
+.bg-animations {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(120deg, #0f172a, #1e293b, #0ea5a4, #60a5fa);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  opacity: 0.9;
+}
+
+.bg-animations .blob {
+  position: absolute;
+  filter: blur(90px);
+  opacity: 0.25;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Translucent panel used by cards/containers to improve legibility */
+.translucent-panel {
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(6px) saturate(120%);
+  -webkit-backdrop-filter: blur(6px) saturate(120%);
+  box-shadow: 0 8px 30px rgba(2,6,23,0.2);
+  border-radius: 12px;
+}
+
+.dark-theme .translucent-panel {
+  background: rgba(6,10,18,0.5);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+}
+
+/* Specific override for project cards to keep layout consistent */
+.card-main-proyects-item.translucent-panel {
+  background: rgba(255,255,255,0.6);
+}
+
+.dark-theme .card-main-proyects-item.translucent-panel {
+  background: rgba(8,12,18,0.45);
+}
+
+/* Delay utility classes */
+.delay-0 { animation-delay: 0s; }
+.delay-1 { animation-delay: 0.08s; }
+.delay-2 { animation-delay: 0.16s; }
+.delay-3 { animation-delay: 0.28s; }
+.delay-4 { animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.56s; }
+.delay-6 { animation-delay: 0.72s; }
+
+/* Simple stagger helper for direct children */
+.stagger > * { opacity: 0; transform: translateY(6px); }
+.stagger > *:nth-child(1) { animation: fadeUp 0.56s both; animation-delay: 0.06s; }
+.stagger > *:nth-child(2) { animation: fadeUp 0.56s both; animation-delay: 0.12s; }
+.stagger > *:nth-child(3) { animation: fadeUp 0.56s both; animation-delay: 0.18s; }
+.stagger > *:nth-child(4) { animation: fadeUp 0.56s both; animation-delay: 0.24s; }
+.stagger > *:nth-child(5) { animation: fadeUp 0.56s both; animation-delay: 0.30s; }
+
+/* Small interactive tweaks */
+.hero-btn { transition: transform 0.18s ease, box-shadow 0.18s ease; }
+.hero-btn:active { transform: translateY(1px) scale(0.995); }
+
 

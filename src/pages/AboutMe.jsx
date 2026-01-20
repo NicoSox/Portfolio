@@ -1,14 +1,14 @@
 import Header from "../components/Header";
-import Main from "../components/aboutMe/Main";
 import Footer from "../components/Footer";
-
-
+import Portfolio from './Portfolio';
 
 const AboutMe = () => {
     return(
         <>
         <Header/>
-        <Main/>
+        <main>
+          <Portfolio />
+        </main>
         <Footer/>
         </>
     )

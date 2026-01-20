@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; 
-
-import '../../styles/css/MainAbout.css';
+// migrated to Tailwind utilities (removed component CSS import)
+import '../../index.css';
 
 const Main = () => {
   const [info, setInfo] = useState(null);
-  const navigate = useNavigate(); 
 
   useEffect(() => {
     fetch('/data.json')
@@ -18,43 +16,42 @@ const Main = () => {
       .catch((err) => console.error('Error al cargar datos:', err));
   }, []);
 
-  if (!info) return <p>Cargando información...</p>;
+  if (!info) return <p className="text-center py-8">Cargando información...</p>;
 
   return (
-    <div className="main-scrollable">
-      {/* Botón volver arriba a la izquierda */}
-      <button onClick={() => navigate(-1)}style={{ position: 'absolute',top: '10px',left: '10px',padding: '8px 12px',cursor: 'pointer',borderRadius: '5px',border: '1px solid #ccc',backgroundColor: '#fff',zIndex: 1000,}}>
-        ← Volver
-      </button>
+    <div className="main-scrollable animated fade-in delay-0">
 
-      <div className="about-container">
-        <h1 style={{ textAlign: "center" }}>About Me</h1>
-        <div className="profile-card">
-          <img
-            src={info.imagen}
-            alt={`${info.nombre} ${info.apellido}`}
-            className="profile-image"
-          />
-          <div className="profile-info">
-            <h2>{info.nombre} {info.segundo_nombre} {info.apellido}</h2>
-            <p><strong>Edad:</strong> {info.edad}</p>
-            <p><strong>Facultad:</strong> {info.facultad}</p>
-            <p><strong>Carrera actual:</strong> {info.carrera}</p>
-            <p><strong>Próxima carrera:</strong> {info.proxima_carrera}</p>
-            <p><strong>Email:</strong> <a href={`mailto:${info.mail}`}>{info.mail}</a></p>
-            <p><strong>Teléfono:</strong> <a href={`tel:${info.telefono}`}>{info.telefono}</a></p>
-            <p>
-              <strong>Redes:</strong>{' '}
-              <a href={info.github} target="_blank" rel="noopener noreferrer">GitHub</a> |{' '}
-              <a href={info.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            </p>
-            <div>
-              <strong>Lenguajes y tecnologías:</strong>
-              <ul className="tech-list">
-                {info.lenguajes.map((tech, i) => (
-                  <li key={i}>{tech}</li>
-                ))}
-              </ul>
+      <div className="about-card mx-auto max-w-4xl p-8 md:p-12 rounded-xl shadow-lg bg-white/80 dark:bg-slate-800/60 text-slate-900 dark:text-slate-100 backdrop-blur-sm">
+        <h1 className="text-3xl font-semibold text-center mb-6">About Me</h1>
+
+        <div className="flex flex-col md:flex-row items-start md:items-center gap-8">
+          <div className="flex-shrink-0">
+            <img
+              src={info.imagen}
+              alt={`${info.nombre} ${info.apellido}`}
+              className="w-36 h-36 md:w-44 md:h-44 rounded-full object-cover shadow-xl"
+            />
+          </div>
+
+          <div className="flex-1 min-w-0">
+            <h2 className="text-2xl font-bold text-sky-600 mb-2">{info.nombre} {info.segundo_nombre} {info.apellido}</h2>
+            <div className="space-y-1 text-sm text-slate-700 dark:text-slate-200">
+              <p><span className="font-semibold">Edad:</span> {info.edad}</p>
+              <p><span className="font-semibold">Facultad:</span> {info.facultad}</p>
+              <p><span className="font-semibold">Carrera actual:</span> {info.carrera}</p>
+              <p><span className="font-semibold">Próxima carrera:</span> {info.proxima_carrera}</p>
+              <p><span className="font-semibold">Email:</span> <a className="text-sky-600 underline" href={`mailto:${info.mail}`}>{info.mail}</a></p>
+              <p><span className="font-semibold">Teléfono:</span> <a className="text-sky-600 underline" href={`tel:${info.telefono}`}>{info.telefono}</a></p>
+              <p><span className="font-semibold">Redes:</span> <a className="text-sky-600 underline" href={info.github} target="_blank" rel="noopener noreferrer">GitHub</a> <span className="mx-2">|</span> <a className="text-sky-600 underline" href={info.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+
+              <div className="mt-3">
+                <strong className="block mb-2">Lenguajes y tecnologías:</strong>
+                <ul className="flex flex-wrap gap-2">
+                  {info.lenguajes.map((tech, i) => (
+                    <li key={i} className="px-3 py-1 bg-slate-100 dark:bg-slate-700 rounded-full text-sm">{tech}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </div>

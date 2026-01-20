@@ -1,13 +1,14 @@
 import Header from '../components/Header';
-import Main from '../components/proyects/Main';
 import Footer from '../components/Footer';
-
+import Portfolio from './Portfolio';
 
 const Proyects = () =>{
     return(
         <>
         <Header/>
-        <Main/>
+        <main>
+          <Portfolio />
+        </main>
         <Footer/>
         </>
     )

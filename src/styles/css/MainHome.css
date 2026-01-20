@@ -23,15 +23,11 @@
 }
 
 .main-scrollable {
-  position: absolute;
-  top: 60px;
-  left: 0;
-  right: 0;
-  bottom: 70px; /* alto del footer */
-  overflow-y: auto;
-  overflow-x: hidden;
+  position: relative;
+  padding: 80px 0 90px; /* espacio para header y footer */
   width: 100%;
   box-sizing: border-box;
+  overflow-x: hidden;
   background: var(--bg-gradient);
 }
 

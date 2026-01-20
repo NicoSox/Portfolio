@@ -1,12 +1,14 @@
-import Main from '../components/contact/Main';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import Portfolio from './Portfolio';
 
 const Contact =() => {
     return(
         <>
         <Header/>
-        <Main/>
+        <main>
+          <Portfolio />
+        </main>
         <Footer/>
         </>
     )
