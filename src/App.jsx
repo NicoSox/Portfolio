@@ -29,8 +29,8 @@ const translations = {
     },
     about: {
       title: 'Sobre Mí',
-      paragraph1: 'Soy un desarrollador apasionado por la tecnología y la creación de soluciones innovadoras. Actualmente estoy cursando',
-      paragraph2: ', y planeo continuar con',
+      paragraph1: 'Soy un desarrollador apasionado por la tecnología y la creación de soluciones innovadoras. Termine en diciembre de 2025',
+      paragraph2: ', actualmente me encuentro estudiando ',
       paragraph3: 'Me especializo en desarrollo full stack con tecnologías modernas como React, Node.js y bases de datos SQL.',
       fields: {
         name: 'Nombre',
