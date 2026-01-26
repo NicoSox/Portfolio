@@ -63,13 +63,6 @@ const Contact = ({ data, labels }) => {
           <p className="section-subtitle">{labels.subtitle}</p>
         </div>
         
-        {/* Mensaje de éxito */}
-        {showSuccess && (
-          <div className="success-message">
-            ✅ ¡Mensaje enviado exitosamente! Gracias por contactarme.
-          </div>
-        )}
-        
         <div className="contact-content">
           <div className="contact-info">
             <div className="contact-card">
@@ -158,6 +151,13 @@ const Contact = ({ data, labels }) => {
               {labels.form.submit}
               <i className="fas fa-paper-plane"></i>
             </button>
+            
+            {/* Mensaje de éxito */}
+            {showSuccess && (
+              <div className="success-message">
+                ✅ ¡Mensaje enviado exitosamente! Gracias por contactarme.
+              </div>
+            )}
           </form>
         </div>
       </div>
