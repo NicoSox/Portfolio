@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './Contact.css';
 
 const Contact = ({ data, labels }) => {
@@ -9,23 +9,15 @@ const Contact = ({ data, labels }) => {
     message: ''
   });
   const [showSuccess, setShowSuccess] = useState(false);
+  const timeoutRef = useRef(null);
 
-  // Detectar si el usuario regresa después de enviar el correo
+  // Cleanup timeout on unmount
   useEffect(() => {
-    const mailSent = sessionStorage.getItem('mailSent');
-    if (mailSent === 'true') {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setShowSuccess(true);
-      sessionStorage.removeItem('mailSent');
-      
-      // Ocultar mensaje después de 5 segundos
-      const timer = setTimeout(() => {
-        setShowSuccess(false);
-      }, 5000);
-      
-      // Cleanup timer on unmount
-      return () => clearTimeout(timer);
-    }
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
   }, []);
 
   const handleChange = (e) => {
@@ -38,14 +30,28 @@ const Contact = ({ data, labels }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Marcar que se va a enviar el correo
-    sessionStorage.setItem('mailSent', 'true');
-    
+    // Construir el link mailto
     const mailtoLink = `mailto:${data.mail}?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
       `${labels.form.mailBodyLabels.name}: ${formData.name}\n${labels.form.mailBodyLabels.email}: ${formData.email}\n\n${labels.form.mailBodyLabels.message}:\n${formData.message}`
     )}`;
     
+    // Abrir el cliente de correo
     window.location.href = mailtoLink;
+    
+    // Mostrar mensaje de éxito inmediatamente
+    setShowSuccess(true);
+    
+    // Limpiar el formulario
+    setFormData({ name: '', email: '', subject: '', message: '' });
+    
+    // Ocultar mensaje después de 5 segundos
+    // Limpiar timeout anterior si existe
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    timeoutRef.current = setTimeout(() => {
+      setShowSuccess(false);
+    }, 5000);
   };
 
   return (
