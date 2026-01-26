@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Contact.css';
 
 const Contact = ({ data, labels }) => {
@@ -8,9 +8,25 @@ const Contact = ({ data, labels }) => {
     subject: '',
     message: ''
   });
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  // Detectar si el usuario regresa después de enviar el correo
+  useEffect(() => {
+    const mailSent = sessionStorage.getItem('mailSent');
+    if (mailSent === 'true') {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setShowSuccess(true);
+      sessionStorage.removeItem('mailSent');
+      
+      // Ocultar mensaje después de 5 segundos
+      const timer = setTimeout(() => {
+        setShowSuccess(false);
+      }, 5000);
+      
+      // Cleanup timer on unmount
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -19,35 +35,17 @@ const Contact = ({ data, labels }) => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
-    setError(false);
-    setSuccess(false);
-
-    try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-      const response = await fetch(`${apiUrl}/api/contact`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setSuccess(true);
-        setFormData({ name: '', email: '', subject: '', message: '' });
-        setTimeout(() => setSuccess(false), 5000);
-      } else {
-        setError(true);
-      }
-    } catch (err) {
-      setError(true);
-      console.error('Error:', err);
-    } finally {
-      setLoading(false);
-    }
+    
+    // Marcar que se va a enviar el correo
+    sessionStorage.setItem('mailSent', 'true');
+    
+    const mailtoLink = `mailto:${data.mail}?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
+      `${labels.form.mailBodyLabels.name}: ${formData.name}\n${labels.form.mailBodyLabels.email}: ${formData.email}\n\n${labels.form.mailBodyLabels.message}:\n${formData.message}`
+    )}`;
+    
+    window.location.href = mailtoLink;
   };
 
   return (
@@ -58,6 +56,14 @@ const Contact = ({ data, labels }) => {
           <div className="title-underline"></div>
           <p className="section-subtitle">{labels.subtitle}</p>
         </div>
+        
+        {/* Mensaje de éxito */}
+        {showSuccess && (
+          <div className="success-message">
+            ✅ ¡Mensaje enviado exitosamente! Gracias por contactarme.
+          </div>
+        )}
+        
         <div className="contact-content">
           <div className="contact-info">
             <div className="contact-card">
@@ -142,20 +148,10 @@ const Contact = ({ data, labels }) => {
                 placeholder={labels.form.placeholderMessage}
               ></textarea>
             </div>
-            <button type="submit" className="submit-btn" disabled={loading}>
-              {loading ? 'Enviando...' : labels.form.submit}
+            <button type="submit" className="submit-btn">
+              {labels.form.submit}
               <i className="fas fa-paper-plane"></i>
             </button>
-            {success && (
-              <div className="success-message">
-                ✅ ¡Mensaje enviado exitosamente! Te responderé pronto.
-              </div>
-            )}
-            {error && (
-              <div className="error-message">
-                ❌ Error al enviar el mensaje. Por favor intenta nuevamente.
-              </div>
-            )}
           </form>
         </div>
       </div>
