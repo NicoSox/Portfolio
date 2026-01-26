@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './Contact.css';
 
 const Contact = ({ data, labels }) => {
@@ -9,6 +9,16 @@ const Contact = ({ data, labels }) => {
     message: ''
   });
   const [showSuccess, setShowSuccess] = useState(false);
+  const timeoutRef = useRef(null);
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -35,7 +45,11 @@ const Contact = ({ data, labels }) => {
     setFormData({ name: '', email: '', subject: '', message: '' });
     
     // Ocultar mensaje después de 5 segundos
-    setTimeout(() => {
+    // Limpiar timeout anterior si existe
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    timeoutRef.current = setTimeout(() => {
       setShowSuccess(false);
     }, 5000);
   };
