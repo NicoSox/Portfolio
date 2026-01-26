@@ -19,9 +19,12 @@ const Contact = ({ data, labels }) => {
       sessionStorage.removeItem('mailSent');
       
       // Ocultar mensaje después de 5 segundos
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         setShowSuccess(false);
       }, 5000);
+      
+      // Cleanup timer on unmount
+      return () => clearTimeout(timer);
     }
   }, []);
 
