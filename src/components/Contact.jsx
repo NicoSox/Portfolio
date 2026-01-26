@@ -14,6 +14,7 @@ const Contact = ({ data, labels }) => {
   useEffect(() => {
     const mailSent = sessionStorage.getItem('mailSent');
     if (mailSent === 'true') {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setShowSuccess(true);
       sessionStorage.removeItem('mailSent');
       
