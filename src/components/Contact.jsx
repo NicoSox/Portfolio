@@ -8,6 +8,9 @@ const Contact = ({ data, labels }) => {
     subject: '',
     message: ''
   });
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -16,12 +19,35 @@ const Contact = ({ data, labels }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const mailtoLink = `mailto:${data.mail}?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
-      `${labels.form.mailBodyLabels.name}: ${formData.name}\n${labels.form.mailBodyLabels.email}: ${formData.email}\n\n${labels.form.mailBodyLabels.message}:\n${formData.message}`
-    )}`;
-    window.location.href = mailtoLink;
+    setLoading(true);
+    setError(false);
+    setSuccess(false);
+
+    try {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${apiUrl}/api/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSuccess(true);
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        setTimeout(() => setSuccess(false), 5000);
+      } else {
+        setError(true);
+      }
+    } catch (err) {
+      setError(true);
+      console.error('Error:', err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -116,10 +142,20 @@ const Contact = ({ data, labels }) => {
                 placeholder={labels.form.placeholderMessage}
               ></textarea>
             </div>
-            <button type="submit" className="submit-btn">
-              {labels.form.submit}
+            <button type="submit" className="submit-btn" disabled={loading}>
+              {loading ? 'Enviando...' : labels.form.submit}
               <i className="fas fa-paper-plane"></i>
             </button>
+            {success && (
+              <div className="success-message">
+                ✅ ¡Mensaje enviado exitosamente! Te responderé pronto.
+              </div>
+            )}
+            {error && (
+              <div className="error-message">
+                ❌ Error al enviar el mensaje. Por favor intenta nuevamente.
+              </div>
+            )}
           </form>
         </div>
       </div>
