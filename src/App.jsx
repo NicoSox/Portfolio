@@ -67,6 +67,7 @@ const translations = {
     contact: {
       title: 'Contacto',
       subtitle: '¿Tienes un proyecto en mente? ¡Hablemos!',
+      successMessage: '✅ ¡Mensaje enviado exitosamente! Gracias por contactarme.',
       cards: {
         email: 'Email',
         phone: 'Teléfono',
@@ -164,6 +165,7 @@ const translations = {
     contact: {
       title: 'Contact',
       subtitle: 'Do you have a project in mind? Let’s talk!',
+      successMessage: '✅ Message sent successfully! Thank you for contacting me.',
       cards: {
         email: 'Email',
         phone: 'Phone',

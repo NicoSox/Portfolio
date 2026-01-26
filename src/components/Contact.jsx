@@ -14,14 +14,18 @@ const Contact = ({ data, labels }) => {
   useEffect(() => {
     const mailSent = sessionStorage.getItem('mailSent');
     if (mailSent === 'true') {
+      // This is safe - syncing with external state (sessionStorage)
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setShowSuccess(true);
       sessionStorage.removeItem('mailSent');
       
       // Ocultar mensaje después de 5 segundos
-      setTimeout(() => {
+      const timeoutId = setTimeout(() => {
         setShowSuccess(false);
       }, 5000);
+      
+      // Cleanup timeout on unmount
+      return () => clearTimeout(timeoutId);
     }
   }, []);
 
@@ -57,7 +61,7 @@ const Contact = ({ data, labels }) => {
         {/* Mensaje de éxito */}
         {showSuccess && (
           <div className="success-message">
-            ✅ ¡Mensaje enviado exitosamente! Gracias por contactarme.
+            {labels.successMessage}
           </div>
         )}
         
