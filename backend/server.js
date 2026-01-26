@@ -8,25 +8,59 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONTEND_URL || 'http://localhost:5173'
+}));
 app.use(express.json());
+
+// Helper function to escape HTML to prevent XSS
+const escapeHtml = (unsafe) => {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+};
+
+// Helper function to validate email format
+const isValidEmail = (email) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
 
 app.post('/api/contact', async (req, res) => {
   const { name, email, subject, message } = req.body;
+
+  // Validate required fields
+  if (!name || !email || !subject || !message) {
+    return res.status(400).json({ message: 'Todos los campos son requeridos' });
+  }
+
+  // Validate email format
+  if (!isValidEmail(email)) {
+    return res.status(400).json({ message: 'Formato de email inválido' });
+  }
+
+  // Sanitize inputs to prevent XSS
+  const safeName = escapeHtml(name.trim());
+  const safeEmail = escapeHtml(email.trim());
+  const safeSubject = escapeHtml(subject.trim());
+  const safeMessage = escapeHtml(message.trim());
 
   try {
     await transporter.sendMail({
       from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_USER,
-      replyTo: email,
-      subject: `Portfolio - ${subject}`,
+      replyTo: safeEmail,
+      subject: `Portfolio - ${safeSubject}`,
       html: `
         <h2>Nuevo mensaje desde el portfolio</h2>
-        <p><strong>Nombre:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Asunto:</strong> ${subject}</p>
+        <p><strong>Nombre:</strong> ${safeName}</p>
+        <p><strong>Email:</strong> ${safeEmail}</p>
+        <p><strong>Asunto:</strong> ${safeSubject}</p>
         <h3>Mensaje:</h3>
-        <p>${message}</p>
+        <p>${safeMessage.replace(/\n/g, '<br>')}</p>
       `,
     });
 

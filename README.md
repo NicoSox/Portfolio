@@ -24,6 +24,8 @@ El formulario de contacto del portfolio utiliza un backend con Nodemailer para e
    EMAIL_USER=tu_email@gmail.com
    EMAIL_PASS=tu_app_password_de_gmail
    PORT=5000
+   FRONTEND_URL=http://localhost:5173
+   NODE_ENV=development
    ```
 
 3. Para Gmail, generar App Password en: https://myaccount.google.com/apppasswords

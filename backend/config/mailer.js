@@ -8,9 +8,12 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
   },
-  tls: {
-    rejectUnauthorized: false 
-  }
+  // Only disable TLS verification in development
+  ...(process.env.NODE_ENV === 'development' && {
+    tls: {
+      rejectUnauthorized: false 
+    }
+  })
 });
 
 export default transporter;
