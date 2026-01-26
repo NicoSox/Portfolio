@@ -129,7 +129,7 @@
   min-height: 120px;
 }
 
-.submit-btn {
+.btn {
   width: 100%;
   padding: 1rem;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -139,63 +139,17 @@
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
 }
 
-.submit-btn:hover {
+.btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
 }
 
-.submit-btn:active {
+.btn:active {
   transform: translateY(0);
-}
-
-.submit-btn i {
-  font-size: 1rem;
-}
-
-.success-message,
-.error-message {
-  margin-top: 1rem;
-  padding: 1rem;
-  border-radius: 8px;
-  text-align: center;
-  font-weight: 500;
-  animation: slideIn 0.3s ease;
-}
-
-.success-message {
-  background-color: #d4edda;
-  color: #155724;
-  border: 1px solid #c3e6cb;
-}
-
-.error-message {
-  background-color: #f8d7da;
-  color: #721c24;
-  border: 1px solid #f5c6cb;
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.submit-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
 }
 
 @media (max-width: 968px) {
@@ -235,5 +189,32 @@
     width: 50px;
     height: 50px;
     font-size: 1.3rem;
+  }
+}
+
+/* Mensaje de éxito */
+.success-message {
+  margin: 0 auto 2rem;
+  max-width: 600px;
+  padding: 1rem 1.5rem;
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 1.1rem;
+  animation: slideDown 0.3s ease-out;
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.15);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

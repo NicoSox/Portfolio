@@ -85,6 +85,7 @@ const translations = {
         placeholderSubject: 'Asunto del mensaje',
         placeholderMessage: 'Tu mensaje...',
         submit: 'Enviar Mensaje',
+        send: 'Enviar Mensaje',
         mailBodyLabels: {
           name: 'Nombre',
           email: 'Email',
@@ -181,6 +182,7 @@ const translations = {
         placeholderSubject: 'Message subject',
         placeholderMessage: 'Your message...',
         submit: 'Send Message',
+        send: 'Send Message',
         mailBodyLabels: {
           name: 'Name',
           email: 'Email',
